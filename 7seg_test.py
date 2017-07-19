@@ -33,6 +33,21 @@ for digit in common:
     GPIO.setup(digit, GPIO.OUT)
     GPIO.output(digit, 0)
 
+# Establishing segment loop
+seg1=(0, 13, 13, 0, 0, 0, 0)
+#seg1=(0, 5, 5, 0, 0, 0, 0) #Pin based on 7 segment pins
+seg2=(33, 31, 31, 33, 29, 29, 15)
+#seg2=(9, 8, 8, 9, 7, 7, 6) #Pin based on 7 segment pins
+seg3=(38, 40, 40, 38, 37, 37, 35)
+#seg3=(13, 12, 12, 13, 11, 11, 10) #Pin based on 7 segment pins
+seg4=(18, 22, 22, 18, 31, 31, 36)
+#seg4=(17, 16, 16, 17, 15, 15, 14) #Pin based on 7 segment pins
+c1=(7, 7, 0, 0, 0, 7, 7)
+#c1=(1, 1, 0, 0, 0, 1, 1) #Pin based on 7 segment pins
+c2=(0, 0, 11, 11, 11, 0, 0)
+#c2=(0, 0, 2, 2, 2, 0, 0) #Pin based on 7 segment pins
+	
+# Establishing high-low status per number
 num = {' ':(0,0,0,0,0,0,0),
     '0':(1,1,1,1,1,1,0),
     '1':(0,1,1,0,0,0,0),
@@ -47,25 +62,6 @@ num = {' ':(0,0,0,0,0,0,0),
 
 sleep_time=0.1
 
+
 finally:
 	GPIO.cleanup()
-
-seg1=[0, 5, 5, 0, 0, 0, 0]
-seg2=[9, 8, 8, 9, 7, 7, 6]
-seg3=[13, 12, 12, 13, 11, 11, 10]
-seg4=[17, 16, 16, 17, 15, 15, 14]
-c1=[1, 1, 0, 0, 0, 1, 1]
-c2=[0, 0, 2, 2, 2, 0, 0]
-
-i=0
-seq_group=[]
-while ( i <= 6 ):
-	seq=[]
-	seq.append(seg1[i])
-	seq.append(seg2[i])
-	seq.append(seg3[i])
-	seq.append(seg4[i])
-	seq.append(c1[i])
-	seq.append(c2[i])
-	i+=1
-	seq_group.append(seq)
