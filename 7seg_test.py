@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 
 # Pin reference
-#	C1	|	7			
-#	C2	|	11	12		
-#	5	|	13	16		
-#	6	|	15	18	|	17
-#	7	|	29	22	|	16
-#	8	|	31	31	|	15
-#	9	|	33	36	|	14
-#	10	|	35	38	|	13
-#	11	|	37	40	|	12
+#   C1  |   7           
+#   C2  |   11  12      
+#   5   |   13  16      
+#   6   |   15  18  |   17
+#   7   |   29  22  |   16
+#   8   |   31  31  |   15
+#   9   |   33  36  |   14
+#   10  |   35  38  |   13
+#   11  |   37  40  |   12
 
-
+import time
 from time import sleep
 import RPi.GPIO as GPIO
 
@@ -46,7 +46,8 @@ c1=(7, 7, 0, 0, 0, 7, 7)
 #c1=(1, 1, 0, 0, 0, 1, 1) #Pin based on 7 segment pins
 c2=(0, 0, 11, 11, 11, 0, 0)
 #c2=(0, 0, 2, 2, 2, 0, 0) #Pin based on 7 segment pins
-	
+all_seg=[seg1,seg2,seg3,seg4]
+
 # Establishing high-low status per number
 num = {' ':(0,0,0,0,0,0,0),
     '0':(1,1,1,1,1,1,0),
@@ -60,8 +61,22 @@ num = {' ':(0,0,0,0,0,0,0),
     '8':(1,1,1,1,1,1,1),
     '9':(1,1,1,1,0,1,1)}
 
-sleep_time=0.1
+all_seg=[seg1,seg2,seg3,seg4]
+sleep_t=0.001
 
-
+try:
+    while True:
+        n = time.ctime()[11:13]+time.ctime()[14:16]
+        s = str(n).rjust(4)
+        for a in range(4):
+           for b in range (0,7):
+               pin_no=all_seg[a][b]
+               if (pin_no == 0):
+                    GPIO.output(13, 0)
+                    else
+                    GPIO.output(pin_no, num[s[a]][b])
+               GPIO.output(7, c1[b])
+               GPIO.output(11, c2[b])
+               time.sleep(sleep_t)
 finally:
-	GPIO.cleanup()
+    GPIO.cleanup()
